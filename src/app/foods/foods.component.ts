@@ -1,24 +1,41 @@
 import { Component } from '@angular/core';
 import { BaseService } from '../base.service';
+import { SortPipe } from '../sort.pipe';
 
 interface Food {
   ar: "String"
 }
 
+interface SortOption {
+  label: string;
+  value: string;
+}
+
 @Component({
   selector: 'app-foods',
   templateUrl: './foods.component.html',
-  styleUrl: './foods.component.css'
+  styleUrl: './foods.component.css',
 })
 export class FoodsComponent {
 
   foods:any=[]
   public keresoSzo=""
 
-  public minPrice = 0;
-  public maxPrice = 0;
-
+  minPrice = 0;
+  maxPrice = 0;
   slide_max = 0;
+  sortBy = "";
+
+  sortOptions: SortOption[] = [
+    { label: 'Increasing price', value: 'price-asc' },
+    { label: 'Decreasing price', value: 'price-desc' },
+  ];
+
+  sortData(sortOption: string) {
+    this.sortBy = sortOption;
+    const sortPipe = new SortPipe();
+    this.foods = sortPipe.transform(this.foods, sortOption);
+  }
 
   constructor(private base:BaseService) {
     this.base.getFoods().subscribe((data:any)=>{

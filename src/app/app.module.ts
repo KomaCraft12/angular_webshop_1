@@ -12,6 +12,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './search.pipe';
 import { FilterPipe } from './filter.pipe';
+import { SortPipe } from './sort.pipe';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { FilterPipe } from './filter.pipe';
     ErrorComponent,
     SearchPipe,
     FilterPipe,
+    SortPipe,
   ],
   imports: [
     BrowserModule,
